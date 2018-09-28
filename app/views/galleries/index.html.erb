@@ -1,33 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Galleries</h1>
+<h1>Galleries</h1>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <% @galleries.each.with_index(0) do |gallery, index| %>
+        <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= index.zero? ? 'active' : '' %>"></li>
+      <% end %>
+    </ol>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Caption</th>
-      <th>Description</th>
-      <th>Image</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @galleries.each do |gallery| %>
-      <tr>
-        <td><%= gallery.name %></td>
-        <td><%= gallery.caption %></td>
-        <td><%= gallery.description %></td>
-        <td><%= gallery.image %></td>
-        <td><%= link_to 'Show', gallery %></td>
-        <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
-        <td><%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+  <div class="carousel-inner" role="listbox" style=" width: 50%; height: 400px !important;">
+    <% @galleries.each.with_index(0) do |gallery, index| %>
+      <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+        <%= link_to gallery.image.url do %>
+          <%= image_tag(gallery.image, class: 'd-block w-100 img-fluid') %>
+        <% end %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<br>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="width: 20%; height: 350px ">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
 
-<%= link_to 'New Gallery', new_gallery_path %>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" style="width: 130%; height: 350px ">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<script type="text/javascript">
+  $(document).on('turbolinks:load', function(){
+     $('.carousel').carousel({
+        interval: 2000
+     });
+  });
+</script>
+
+
+<%= link_to 'New Gallery', new_gallery_path, class: "btn btn-primary" %>
