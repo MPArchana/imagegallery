@@ -12,19 +12,38 @@
         <td><strong>Name:</strong></td>
         <td><%= @gallery.name %></td>
       </tr>
+
       <tr>
         <td><strong>Caption:</strong></td>
         <td><%= @gallery.caption %></td>
       </tr>
+
       <tr>
         <td><strong>Description:</strong></td>
         <td><%= @gallery.description %></td>
       </tr>
+
       <tr>
         <td>strong>Image:</strong></td>
         <td><%= @gallery.image %></td>
         <td><img src="<%= @gallery.image %>"></td>
       </tr>
+
+       <tr>
+        <td><strong>Category List:</strong></td>
+        <td>
+          <ul>
+            <% @gallery.categories.each do |category| %>
+              <%= link_to category do %>
+                <li class="list-group">
+                  <td><%= @category.name %></td>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+
     </tbody>
   </table>
 </div>

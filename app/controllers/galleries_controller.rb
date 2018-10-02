@@ -1,5 +1,5 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy]
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :multiple_categories]
 
   # GET /galleries
   # GET /galleries.json
@@ -21,10 +21,19 @@ class GalleriesController < ApplicationController
   def edit
   end
 
+  def multiple_categories
+    @categories = Category.all
+    
+  end
+
+
   # POST /galleries
   # POST /galleries.json
   def create
     @gallery = Gallery.new(gallery_params)
+    @gallery.category_ids = params[:gallery][:category_ids] rescue []
+    @gallery.save
+ 
 
     respond_to do |format|
       if @gallery.save
@@ -69,6 +78,7 @@ class GalleriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :caption, :description, :image)
+      params.require(:gallery).permit(:name, :caption, :description, :image, 
+        category_ids: [])
     end
 end
