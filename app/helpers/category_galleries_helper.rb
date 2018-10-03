@@ -1,0 +1,2 @@
+module CategoryGalleriesHelper
+end

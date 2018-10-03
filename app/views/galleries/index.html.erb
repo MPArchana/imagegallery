@@ -1,30 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<div class="btn-group float-right mt-2" role="group">
-  <%= link_to 'New Gallery', new_gallery_path, class: "btn btn-primary" %>
-</div>
+<div class="container">
+  <div class="btn-group float-right mt-2" role="group">
+    <%= link_to 'New Gallery', new_gallery_path, class: "btn btn-primary" %>
+  </div>
 
 <h1>Image Gallery</h1>
 
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" class="center">
-    <ol class="carousel-indicators">
-      <% @galleries.each.with_index(0) do |gallery, index| %>
-        <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= index.zero? ? 'active' : '' %>"></li>
-      <% end %>
-    </ol>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" class="center">
+      <ol class="carousel-indicators">
+        <% @galleries.each.with_index(0) do |gallery, index| %>
+          <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<%= index.zero? ? 'active' : '' %>"></li>
+        <% end %>
+      </ol>
 
   <div class="carousel-inner" role="listbox" style=" width: 40%; height: 300px !important; margin-left:300px; margin-right:100px;">
     <% @galleries.each.with_index(0) do |gallery, index| %>
-      <div class="carousel-item <%= index.zero? ? 'active' : '' %> >
+      <div class="carousel-item <%= index.zero? ? 'active' : '' %>" >
         <%= link_to gallery.image.url do %>
-          <%= image_tag(gallery.image, class: 'mx-auto d-block w-100 img-fluid') %>
-          
+        <%= image_tag(gallery.image, class: 'mx-auto d-block w-100 img-fluid') %>  
         <% end %>
       </div>
     <% end %>
   </div>
 
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="width: 70%; height: 400px ">
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="width: 70%; height: 400px " >
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
@@ -35,6 +35,62 @@
   </a>
 </div>
 
+<div class="container">
+    <div class="row">
+      <% @galleries.each do |gallery| %>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+          <a href="<%= gallery_path(gallery.id) %>">
+           <img src="<%= gallery.image %>" class="img-fluid">
+          </a>
+        </div>
+      <% end %>
+    </div>
+</div>
+
+<table>
+  <div class="container"> 
+    <div class="row">
+      <div class="col-md-4 offset-md-4">         
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Caption</th>
+              <th>Description</th>
+              <th>Image</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @galleries.each do |gallery| %>
+              <tr>
+                <td><%= gallery.name %></td>
+                <td><%= gallery.caption %></td>
+                <td><%= gallery.description %></td>
+                <td><%= gallery.image %></td>
+                <td>
+                  <div class="btn-stack">
+                    <%= link_to 'Tag image', multiple_categories_gallery_path(gallery.id), 
+                  class: "btn btn-primary" %>
+                    <%= link_to 'Show', gallery, class: "btn btn-success" %>
+                    <%= link_to 'Edit', edit_gallery_path(gallery), class: "btn btn-info" %>
+                    <%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</table>
+
+<br>
+
+
+
 <script type="text/javascript">
   $(document).on('turbolinks:load', function(){
      $('.carousel').carousel({
@@ -42,5 +98,3 @@
      });
   });
 </script>
-
-

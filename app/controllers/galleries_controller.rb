@@ -1,40 +1,35 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :multiple_categories]
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :multiple_categories, :tag_images]
 
-  # GET /galleries
-  # GET /galleries.json
   def index
     @galleries = Gallery.all
   end
 
-  # GET /galleries/1
-  # GET /galleries/1.json
   def show
   end
-
-  # GET /galleries/new
+  
   def new
     @gallery = Gallery.new
   end
 
-  # GET /galleries/1/edit
   def edit
   end
 
   def multiple_categories
     @categories = Category.all
-    
   end
 
-
-  # POST /galleries
-  # POST /galleries.json
-  def create
-    @gallery = Gallery.new(gallery_params)
+  def tag_images
     @gallery.category_ids = params[:gallery][:category_ids] rescue []
-    @gallery.save
- 
+    if @gallery.save
+      redirect_to @gallery, notice: "Tag the image."
+    else
+      redirect_to multiple_categories_gallery_path(@gallery), alert: "Error."
+    end  
+  end
 
+  def create
+    @gallery = Gallery.new(gallery_params) 
     respond_to do |format|
       if @gallery.save
         format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }
@@ -46,8 +41,6 @@ class GalleriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /galleries/1
-  # PATCH/PUT /galleries/1.json
   def update
     respond_to do |format|
       if @gallery.update(gallery_params)
@@ -60,8 +53,6 @@ class GalleriesController < ApplicationController
     end
   end
 
-  # DELETE /galleries/1
-  # DELETE /galleries/1.json
   def destroy
     @gallery.destroy
     respond_to do |format|
@@ -71,14 +62,13 @@ class GalleriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  
     def set_gallery
       @gallery = Gallery.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :caption, :description, :image, 
-        category_ids: [])
+      params.require(:gallery).permit(:name, :caption, :description, :image, category_ids: [])
     end
 end
+

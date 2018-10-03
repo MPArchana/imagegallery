@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resources :galleries
+  resources :galleries do 
+    get :multiple_categories, on: :member
+    post :tag_images, on: :member
+  end
+
   resources :categories
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

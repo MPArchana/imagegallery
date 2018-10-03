@@ -1,10 +1,9 @@
-<center><h3> Multiple Categories <%= @gallery.name %></h3></center>
+<center><h3> Multiple Categories <%=@gallery.name %></h3></center>
 <br></br>
 <div class="container">
-  <%= simple_form_for @gallery, url: "", method: "post", 
-    html: { class: "form-horizontal" } do |f| %>
+  <%= simple_form_for @gallery, url: "tag_images", method: "post", html: { class: "form-horizontal"} do |f| %>
     <%= f.error_notification %>
-    <% @gallery.category.all.each do |user| %>
+    <% @categories.all.each do |category| %>
       <%= check_box_tag "gallery[category_ids][]", category.id, @gallery.category_ids.include?(category.id) %>
       <%= category.name %>
       <br>
@@ -12,10 +11,10 @@
     
     <div class="row">  
       <div class="col-md-4 offset-md-4"></div>   
-        <%= f.button :submit, "er class: "btn btn-success" %>
+        <%= f.button :submit, "tag_images", class: "btn btn-success" %>
       </div> 
     </div>
   </div>
 <% end %>
 
-<%= link_to 'Back', tasks_path, class: "btn btn-secondary" %>
+<%= link_to 'Back',galleries_path , class: "btn btn-secondary" %>
