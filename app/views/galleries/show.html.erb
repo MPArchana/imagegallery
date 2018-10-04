@@ -36,16 +36,9 @@
           <p class="card-text">
             <p><strong>Description:</strong></p>
             <p><%= @gallery.description %></p>
-            <div>
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Desc</button>
+            <div id="demo" class="collapse">
               <% if @gallery.description.length > 250 %>
-                <%= truncate(gallery.description, length: 250) %>
-                <%= link_to '...Read more', '', class: "read-more-#{@gallery.id}" %>
-                <script>
-                  $('.read-more-<%= @gallery.id %>').on('click', function(e) {
-                    e.preventDefault()
-                    $(this).parent().html('<%= escape_javascript @gallery.description %>')
-                  })
-                </script>
               <% else %>
                 <%= @gallery.description %>
               <% end %>

@@ -5,7 +5,7 @@
     <%= link_to 'New Image', new_gallery_path, class: "btn btn-primary" %>
   </div>
 
-<h1>Image Gallery</h1>
+  <h3>Image Gallery</h3>
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" class="center">
       <ol class="carousel-indicators">
@@ -72,7 +72,6 @@
                 <td><%= gallery.caption %></td>
                 <td><%= gallery.description %></td>
                 <td><%= gallery.image %></td>
-                <td>
                   <div class="btn-stack">
                     <%= link_to 'Tag Categories', multiple_categories_gallery_path(gallery.id), 
                   class: "btn btn-primary" %>
