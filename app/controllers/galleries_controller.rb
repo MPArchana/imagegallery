@@ -30,6 +30,7 @@ class GalleriesController < ApplicationController
 
   def create
     @gallery = Gallery.new(gallery_params) 
+     #render :crop
     respond_to do |format|
       if @gallery.save
         format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }
@@ -44,6 +45,7 @@ class GalleriesController < ApplicationController
   def update
     respond_to do |format|
       if @gallery.update(gallery_params)
+         #render :crop
         format.html { redirect_to @gallery, notice: 'Gallery was successfully updated.' }
         format.json { render :show, status: :ok, location: @gallery }
       else

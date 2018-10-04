@@ -5,4 +5,10 @@ class Category < ActiveRecord::Base
   validates :description, :length => { :maximum => 1024 }
 
 
+  def name_with_code
+    "#{self.name} - #{self.code}"
+  end
+  
+
+
 end

@@ -1,51 +1,79 @@
 <p id="notice"><%= notice %></p>
 <div class="container" >
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th colspan="2"><center>Category Details</center></th>
-      </tr>
-    </thead>
+  <div class="card-columns">
+    <div class="mr-10 p-1 mt-sm-1 mb-sm-1 col-lg-4 d-flex align-items-center">
 
-    <tbody>
-      <tr>
-        <td><strong>Name:</strong></td>
-        <td><%= @gallery.name %></td>
-      </tr>
 
-      <tr>
-        <td><strong>Caption:</strong></td>
-        <td><%= @gallery.caption %></td>
-      </tr>
-
-      <tr>
-        <td><strong>Description:</strong></td>
-        <td><%= @gallery.description %></td>
-      </tr>
-
-      <tr>
-        <td>strong>Image:</strong></td>
-        <td><%= @gallery.image %></td>
-        <td><img src="<%= @gallery.image %>"></td>
-      </tr>
-
-       <tr>
-        <td><strong>Category List:</strong></td>
-        <td>
-          <ul>
-            <% @gallery.categories.each do |category| %>
-              <%= link_to category do %>
-                <li class="list-group">
-                  <td><%= category.name %></td>
-                </li>
-              <% end %>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <div class="card-block">
+       <h4 class="Image Details"><center>Image Details</center></h4>
+      <div class="card bg-light">
       
+        <div class="card-body text-center">
+          <p class="card-text">
+            <p><strong>Name:</strong></p>
+            <p><%= @gallery.name %></p>
+          </p>
+        </div>
+
+        <div class="card-body text-center">
+          <div class="card">
+            <p class="card-text">
+              <p><strong>Image:</strong></p>
+              <p><%= @gallery.image %></p>
+              <%= link_to image_tag(@gallery.image), :class => "card-img", :alt => "Card image cap" %>
+            </p>
+          </div>
+        </div>
+
+        <div class="card-body text-center">
+          <p class="card-text">
+            <p><strong>Caption:</strong></p>
+            <p><%= @gallery.caption %></p>
+          </p>
+        </div>
+
+        <div class="card-body text-center">
+          <p class="card-text">
+            <p><strong>Description:</strong></p>
+            <p><%= @gallery.description %></p>
+            <div>
+              <% if @gallery.description.length > 250 %>
+                <%= truncate(gallery.description, length: 250) %>
+                <%= link_to '...Read more', '', class: "read-more-#{@gallery.id}" %>
+                <script>
+                  $('.read-more-<%= @gallery.id %>').on('click', function(e) {
+                    e.preventDefault()
+                    $(this).parent().html('<%= escape_javascript @gallery.description %>')
+                  })
+                </script>
+              <% else %>
+                <%= @gallery.description %>
+              <% end %>
+            </div>
+          </p>
+        </div>
+
+        <div class="card-body text-center">
+          <p class="card-text">
+            <p><strong>Category List:</strong></p>
+             <ul>
+              <% @gallery.categories.each do |category| %>
+                <%= link_to category do %>
+                  <li class="list-group">
+                    <%= category.name_with_code %>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+   
 <%= link_to 'Edit', edit_gallery_path(@gallery), class: "btn btn-info" %> |
 <%= link_to 'Back', galleries_path, class: "btn btn-secondary" %>
