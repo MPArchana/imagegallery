@@ -13,13 +13,21 @@
             </p>
           </div>
 
-          <div class="card-body text-center">
-            <p class="card-text">
-              <p><strong>Image:</strong></p>
-              <p><%#= @gallery.image %></p>
-              <%= link_to image_tag(@gallery.image), :class => "card-img", :alt => "Card image cap" %>
-            </p>
+          <div class="card-body text-center">  
+            
+              <p class="card-text">
+                 <p><strong>Image:</strong></p>
+              <div class="inner" role="listbox">
+                <div class="item active panzoom">
+                  <%= link_to image_tag(@gallery.image), :class => "card-img", :alt => "Card image cap" %>
+                </div>
+                
+                <p><%#= @gallery.image %></p>
+                <%#= link_to image_tag(@gallery.image), :class => "card-img", :alt => "Card image cap" %>
+              </p>
+            </div>
           </div>
+            
 
           <div class="card-body text-center">
             <p class="card-text">
@@ -65,3 +73,16 @@
    
 <%= link_to 'Edit', edit_gallery_path(@gallery), class: "btn btn-info" %> |
 <%= link_to 'Back', galleries_path, class: "btn btn-secondary" %>
+
+<<script type="text/javascript">
+  (function() {
+    var $section = $('div').first();
+    $section.find('.panzoom').panzoom({
+      $zoomIn: $section.find(".zoom-in"),
+      $zoomOut: $section.find(".zoom-out"),
+      $zoomRange: $section.find(".zoom-range"),
+      $reset: $section.find(".reset")
+    });
+
+  })();
+</script>

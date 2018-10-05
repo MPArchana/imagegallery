@@ -1,11 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container">
+
   <div class="btn-group float-right mt-2" role="group">
     <%= link_to 'New Image', new_gallery_path, class: "btn btn-primary" %>
   </div>
 
-  <h3>Image Gallery</h3>
+<div class="container">
+
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" class="center">
       <ol class="carousel-indicators">
@@ -17,8 +18,9 @@
   <div class="carousel-inner" role="listbox" style=" width: 40%; height: 300px !important; margin-left:300px; margin-right:100px;">
     <% @galleries.each.with_index(0) do |gallery, index| %>
       <div class="carousel-item <%= index.zero? ? 'active' : '' %>" >
+
         <%= link_to gallery.image.url do %>
-        <%= image_tag(gallery.image, class: 'mx-auto d-block w-100 img-fluid') %>  
+        <%= image_tag(gallery.image, size: "100", class: 'mx-auto d-block w-100 img-fluid') %>  
         <% end %>
       </div>
     <% end %>
@@ -36,18 +38,17 @@
 </div>
 
 <div class="container">
+  <div class="grid-box">
     <div class="row">
-      <% @galleries.each do |gallery| %>
-        <div class="p-3 pt-md-2 pl-md-3 mt-sm-3 mb-sm-1 col-md-3 col-sm-6 col-xs-12">
-          <a href="<%= gallery_path(gallery.id) %>">
-           <img src="<%= gallery.image %>" class="img-fluid">
-          </a>
-        </div>
-      <% end %>
+        <% @galleries.each do |gallery| %>
+          <div class="p-3 pt-md-2 pl-md-3 mt-sm-3 mb-sm-1 col-md-3 col-sm-6 col-xs-12">
+            <a href="<%= gallery_path(gallery.id) %>">
+             <img src="<%= gallery.image %>" class="img-fluid">
+            </a>
+          </div>
+        <% end %>
     </div>
   </div>
-  </div>
-</div>
 </div>
 
 <table>
@@ -57,8 +58,8 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Name</th>
               <th>Image</th>
+              <th>Name</th>
               <th>Caption</th>
               <th>Description</th>
               <th colspan="3"></th>
@@ -68,15 +69,15 @@
           <tbody>
             <% @galleries.each do |gallery| %>
               <tr>
-                <td><%= gallery.name %></td>
                 <td><%= image_tag(gallery.image, size: "100") %></td>
+                <td><%= gallery.name %></td>
                 <td><%= gallery.caption %></td>
                 <td><%= gallery.description %></td>
                <td>
                   <div class="btn-stack">
                     <%#= link_to 'Tag Categories', multiple_categories_gallery_path(gallery.id), 
                   class: "btn btn-primary" %>
-                    <%#= link_to 'Show', gallery, class: "btn btn-success" %>
+                    <%= link_to 'Show', gallery, class: "btn btn-success" %>
                     <%= link_to 'Edit', edit_gallery_path(gallery), class: "btn btn-info" %>
                     <%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
                   </div>

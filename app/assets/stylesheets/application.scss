@@ -15,3 +15,79 @@
 
 
 @import "bootstrap";
+
+.card-img-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.card-img-wrap:after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.3);
+  opacity: 0;
+  transition: opacity .25s;
+}
+.card-img-wrap img {
+  transition: transform .25s;
+  width: 100%;
+}
+.card-img-wrap:hover img {
+  transform: scale(1.2);
+}
+.card-img-wrap:hover:after {
+  opacity: 1;
+}
+
+
+.grid-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.first-row {
+  display: flex;
+}
+
+.grid {
+  border: 1px solid #fff;
+  overflow: hidden;
+  transition: all .3s linear;
+}
+
+.one, .two {
+  width: 100px;
+  height: 100px;
+}
+
+.three {
+  width: 202px;
+  height: 100px;
+}
+
+.grid:hover img {
+  transform: scale(2);
+  transition: all .2s linear;
+}
+
+.container {
+  margin-top: 8px;
+}
+
+.inner {
+  overflow: hidden;
+}
+
+.inner {
+  transition: all 1.5s ease;
+}
+
+.inner:hover img {
+  transform: scale(1.5);
+}
+
+.card-block {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+}

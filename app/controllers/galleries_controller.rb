@@ -1,7 +1,7 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :multiple_categories, :tag_images]
-
-  def index
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :multiple_categories, :tag_images, 
+    :all_photo]
+ def index
     @galleries = Gallery.all
   end
 
@@ -13,6 +13,12 @@ class GalleriesController < ApplicationController
   end
 
   def edit
+    
+  end
+
+  def all_photo
+    @galleries = Gallery.all
+    
   end
 
   def multiple_categories
@@ -30,37 +36,34 @@ class GalleriesController < ApplicationController
 
   def create
     @gallery = Gallery.new(gallery_params) 
-     #render :crop
-    respond_to do |format|
-      if @gallery.save
-        format.html { redirect_to @gallery, notice: 'Gallery was successfully created.' }
-        format.json { render :show, status: :created, location: @gallery }
+    if @gallery.save
+      if params[:gallery][:image].present?
+        render :crop
       else
-        format.html { render :new }
-        format.json { render json: @gallery.errors, status: :unprocessable_entity }
+        redirect_to @gallery, notice: "Successfully created user."
       end
+      else
+        render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @gallery.update(gallery_params)
-         #render :crop
-        format.html { redirect_to @gallery, notice: 'Gallery was successfully updated.' }
-        format.json { render :show, status: :ok, location: @gallery }
+    @gallery = Gallery.find(params[:id])
+    if @gallery.update(gallery_params)
+      if params[:gallery][:image].present?
+        render :crop
       else
-        format.html { render :edit }
-        format.json { render json: @gallery.errors, status: :unprocessable_entity }
+        redirect_to @gallery, notice: "Successfully updated gallery."
       end
+    else
+      render :new
     end
   end
 
   def destroy
+    @gallery = Gallery.find(params[:id])
     @gallery.destroy
-    respond_to do |format|
-      format.html { redirect_to galleries_url, notice: 'Gallery was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to galleries_url, notice: "Successfully destroyed gallery."
   end
 
   private
