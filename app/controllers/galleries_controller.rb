@@ -1,6 +1,6 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :multiple_categories, :tag_images, 
-    :all_photo]
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :multiple_categories, :tag_images]
+ 
  def index
     @galleries = Gallery.all
   end
@@ -16,7 +16,7 @@ class GalleriesController < ApplicationController
     
   end
 
-  def all_photo
+  def all_photos
     @galleries = Gallery.all
     
   end
