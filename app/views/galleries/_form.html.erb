@@ -8,6 +8,11 @@
     <%= f.input :caption %>
     <%= f.input :description %>
     <%= f.input :image %>
+     <% @categories.all.each do |category| %>
+      <%= check_box_tag "gallery[category_ids][]", category.id, @gallery.category_ids.include?(category.id) %>
+      <%= category.name %>
+      <br>
+    <% end %>
   </div>
 
   <div class="form-actions">

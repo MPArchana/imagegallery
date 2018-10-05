@@ -10,9 +10,11 @@ class GalleriesController < ApplicationController
   
   def new
     @gallery = Gallery.new
+    @categories = Category.all
   end
 
   def edit
+    @categories = Category.all
     
   end
 
@@ -36,6 +38,8 @@ class GalleriesController < ApplicationController
 
   def create
     @gallery = Gallery.new(gallery_params) 
+    @gallery.category_ids = params[:gallery][:category_ids] rescue []
+
     if @gallery.save
       if params[:gallery][:image].present?
         render :crop
