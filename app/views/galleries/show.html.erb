@@ -1,70 +1,65 @@
 <p id="notice"><%= notice %></p>
-<div class="container" >
+<div class="container " >
   <div class="card-columns">
-    <div class="mr-10 p-1 mt-sm-1 mb-sm-1 col-lg-4 d-flex align-items-center">
-
-
-    <div class="card-block">
+    <div class="mr-10 p-1 mt-sm-1 mb-sm-1 ">
+      <div class="card-block">
        <h4 class="Image Details"><center>Image Details</center></h4>
-      <div class="card bg-light">
+        <div class="card bg-light">
       
-        <div class="card-body text-center">
-          <p class="card-text">
-            <p><strong>Name:</strong></p>
-            <p><%= @gallery.name %></p>
-          </p>
-        </div>
+          <div class="card-body text-center">
+            <p class="card-text">
+              <p><strong>Name:</strong></p>
+              <p><%= @gallery.name %></p>
+            </p>
+          </div>
 
-        <div class="card-body text-center">
-          <div class="card">
+          <div class="card-body text-center">
             <p class="card-text">
               <p><strong>Image:</strong></p>
-              <p><%= @gallery.image %></p>
+              <p><%#= @gallery.image %></p>
               <%= link_to image_tag(@gallery.image), :class => "card-img", :alt => "Card image cap" %>
             </p>
           </div>
-        </div>
 
-        <div class="card-body text-center">
-          <p class="card-text">
-            <p><strong>Caption:</strong></p>
-            <p><%= @gallery.caption %></p>
-          </p>
-        </div>
+          <div class="card-body text-center">
+            <p class="card-text">
+              <p><strong>Caption:</strong></p>
+              <p><%= @gallery.caption %></p>
+            </p>
+          </div>
 
-        <div class="card-body text-center">
-          <p class="card-text">
-            <p><strong>Description:</strong></p>
-            <p><%= @gallery.description %></p>
-            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Desc</button>
-            <div id="demo" class="collapse">
-              <% if @gallery.description.length > 250 %>
-              <% else %>
-                <%= @gallery.description %>
-              <% end %>
-            </div>
-          </p>
-        </div>
-
-        <div class="card-body text-center">
-          <p class="card-text">
-            <p><strong>Category List:</strong></p>
-             <ul>
-              <% @gallery.categories.each do |category| %>
-                <%= link_to category do %>
-                  <li class="list-group">
-                    <%= category.name_with_code %>
-                  </li>
+          <div class="card-body text-center">
+            <p class="card-text">
+              <p><strong>Description:</strong></p>
+              <p><%= @gallery.description %></p>
+              <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#demo">Desc</button>
+              <div id="demo" class="collapse">
+                <% if @gallery.description.length > 250 %>
+                <% else %>
+                  <%= @gallery.description %>
                 <% end %>
-              <% end %>
-            </ul>
-          </p>
-        </div>
+              </div>
+            </p>
+          </div>
 
+          <div class="card-body text-center">
+            <p class="card-text">
+              <p><strong>Category List:</strong></p>
+               <ul>
+                <% @gallery.categories.each do |category| %>
+                  <%= link_to category do %>
+                    <li class="list-group">
+                      <%= category.name_with_code %>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 </div>
    

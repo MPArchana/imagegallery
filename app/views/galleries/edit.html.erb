@@ -1,6 +1,8 @@
 <h1>Editing Gallery</h1>
 
 <%= render 'form' %>
+<%= link_to 'Tag Categories', multiple_categories_gallery_path(@gallery.id), 
+                  class: "btn btn-primary" %>
 
 <%= link_to 'Show', @gallery, class: "btn btn-info" %> |
 <%= link_to 'Back', galleries_path, class: "btn btn-secondary" %>

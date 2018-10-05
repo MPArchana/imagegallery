@@ -58,9 +58,9 @@
           <thead>
             <tr>
               <th>Name</th>
+              <th>Image</th>
               <th>Caption</th>
               <th>Description</th>
-              <th>Image</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -69,13 +69,14 @@
             <% @galleries.each do |gallery| %>
               <tr>
                 <td><%= gallery.name %></td>
+                <td><%= image_tag(gallery.image, size: "100") %></td>
                 <td><%= gallery.caption %></td>
                 <td><%= gallery.description %></td>
-                <td><%= gallery.image %></td>
+               <td>
                   <div class="btn-stack">
-                    <%= link_to 'Tag Categories', multiple_categories_gallery_path(gallery.id), 
+                    <%#= link_to 'Tag Categories', multiple_categories_gallery_path(gallery.id), 
                   class: "btn btn-primary" %>
-                    <%= link_to 'Show', gallery, class: "btn btn-success" %>
+                    <%#= link_to 'Show', gallery, class: "btn btn-success" %>
                     <%= link_to 'Edit', edit_gallery_path(gallery), class: "btn btn-info" %>
                     <%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
                   </div>
