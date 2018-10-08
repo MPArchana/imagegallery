@@ -2,7 +2,12 @@ class GalleriesController < ApplicationController
   before_action :set_gallery, only: [:show, :edit, :update, :destroy, :multiple_categories, :tag_images]
  
  def index
-    @galleries = Gallery.all
+    #@galleries = Gallery.all
+    if params[:search]
+      @galleries = Gallery.search(params[:search]).order("created_at DESC")
+    else
+      @galleries = Gallery.all.order('created_at DESC')
+    end
   end
 
   def show
@@ -22,6 +27,20 @@ class GalleriesController < ApplicationController
     @galleries = Gallery.all
     
   end
+
+  def search_image
+    @galleries = Gallery.all
+    if params[:search]
+      @galleries = Gallery.search(params[:search]).order("created_at DESC")
+    else
+      @galleries = Gallery.all.order('created_at DESC')
+    end
+end
+
+  #def search_image
+    #search = params[:search]
+    #@search = Gallery.where('name LIKE ? ', search)
+  #end
 
   def multiple_categories
     @categories = Category.all

@@ -9,5 +9,10 @@ class Gallery < ActiveRecord::Base
   def crop_image
     image.recreate_versions! if crop_x.present?
   end
+
+  def self.search(search)
+  where("name LIKE ?", "%#{search}%") 
+  # where("content LIKE ?", "%#{search}%")
+end
   
 end

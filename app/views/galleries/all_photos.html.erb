@@ -26,7 +26,7 @@
                 <td><%= gallery.description %></td>
                <td>
                   <div class="btn-stack">
-                    <%#= link_to 'Tag Categories', multiple_categories_gallery_path(gallery.id), 
+                    <%= link_to 'Tag Categories', multiple_categories_gallery_path(gallery.id), 
                   class: "btn btn-primary" %>
                     <%= link_to 'Show', gallery, class: "btn btn-success" %>
                     <%= link_to 'Edit', edit_gallery_path(gallery), class: "btn btn-info" %>

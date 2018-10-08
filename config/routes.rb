@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get :multiple_categories, on: :member
     post :tag_images, on: :member
     get :all_photos, on: :collection
+   
   end
 
   resources :categories

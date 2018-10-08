@@ -51,49 +51,6 @@
   </div>
 </div>
 
-<table>
-  <div class="container"> 
-    <div class="row">
-      <div class="col-md-4 offset-md-4">         
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Caption</th>
-              <th>Description</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <% @galleries.each do |gallery| %>
-              <tr>
-                <td><%= image_tag(gallery.image, size: "100") %></td>
-                <td><%= gallery.name %></td>
-                <td><%= gallery.caption %></td>
-                <td><%= gallery.description %></td>
-               <td>
-                  <div class="btn-stack">
-                    <%#= link_to 'Tag Categories', multiple_categories_gallery_path(gallery.id), 
-                  class: "btn btn-primary" %>
-                    <%= link_to 'Show', gallery, class: "btn btn-success" %>
-                    <%= link_to 'Edit', edit_gallery_path(gallery), class: "btn btn-info" %>
-                    <%= link_to 'Destroy', gallery, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-                  </div>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</table>
-
-<br>
-
-
 
 <script type="text/javascript">
   $(document).on('turbolinks:load', function(){
